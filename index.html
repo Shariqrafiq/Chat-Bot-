@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#0d1117">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="description" content="Open-source AI chatbot - Created & Designed by Shariq Rafiq Anim for GitHub Mobile">
+    <meta name="author" content="Shariq Rafiq Anim">
+    
+    <title>Shariq AI Chatbot | GitHub Mobile</title>
+    
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- Pyodide for Python-based AI models -->
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.25.0/full/pyodide.js"></script>
+    
+    <!-- TensorFlow.js for local ML -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.17.0/dist/tf.min.js"></script>
+    
+    <!-- Transformers.js for open-source models -->
+    <script type="module">
+        import { pipeline } from 'https://cdn.jsdelivr.net/npm/@xenova/transformers@2.14.0/dist/transformers.min.js';
+        window.transformers = { pipeline };
+    </script>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-top">
+                <div class="github-icon">
+                    <svg height="32" viewBox="0 0 16 16" width="32">
+                        <path fill="#58a6ff" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
+                    </svg>
+                </div>
+                <h1>Shariq AI Chatbot</h1>
+            </div>
+            <p class="credit">Created & Designed by <strong>Shariq Rafiq Anim</strong></p>
+            <p class="subtitle">Open-Source Local AI for GitHub Mobile</p>
+        </header>
+
+        <!-- Model Selector -->
+        <div class="model-selector">
+            <label for="modelSelect">AI Model:</label>
+            <select id="modelSelect">
+                <option value="distilgpt2">DistilGPT-2 (Fast)</option>
+                <option value="gpt2">GPT-2 (Balanced)</option>
+                <option value="flan-t5">Flan-T5 (Accurate)</option>
+                <option value="bert">BERT QA (Q&A)</option>
+            </select>
+            <button id="downloadModel" class="btn-download">📥 Download Model</button>
+        </div>
+
+        <!-- Chat Container -->
+        <div class="chat-container">
+            <div class="messages" id="messages">
+                <div class="message bot-message">
+                    <div class="message-content">
+                        <div class="bot-avatar">🤖</div>
+                        <div class="message-text">
+                            <strong>Shariq AI:</strong> Hello! I'm your local open-source AI assistant. I run entirely in your browser. How can I help you today?
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Typing Indicator -->
+            <div class="typing-indicator" id="typingIndicator" style="display: none;">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+
+        <!-- Input Area -->
+        <div class="input-area">
+            <div class="input-container">
+                <textarea 
+                    id="userInput" 
+                    placeholder="Type your message here..."
+                    rows="1"
+                    maxlength="500"
+                ></textarea>
+                <button id="sendButton" class="btn-send">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/>
+                        <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="input-footer">
+                <span class="model-badge" id="modelBadge">Model: DistilGPT-2</span>
+                <span class="character-count" id="charCount">0/500</span>
+            </div>
+        </div>
+
+        <!-- Status Bar -->
+        <div class="status-bar">
+            <div class="status-indicator" id="statusIndicator">
+                <span class="status-dot offline"></span>
+                <span id="statusText">Model not loaded</span>
+            </div>
+            <button id="clearChat" class="btn-clear">Clear Chat</button>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>© 2024 <strong>Shariq Rafiq Anim</strong>. Open Source MIT License</p>
+            <a href="https://github.com/shariq-rafiq-anim/shariq-ai-chatbot" target="_blank" class="github-link">
+                View on GitHub
+            </a>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
