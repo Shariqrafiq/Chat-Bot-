@@ -1,0 +1,22 @@
+{
+    "name": "Shariq AI Chatbot - GitHub Mobile",
+    "short_name": "Shariq AI",
+    "description": "Open-source local AI chatbot created and designed by Shariq Rafiq Anim for GitHub Mobile",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#0d1117",
+    "theme_color": "#0d1117",
+    "orientation": "portrait-primary",
+    "icons": [
+        {
+            "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤖</text></svg>",
+            "sizes": "192x192",
+            "type": "image/svg+xml",
+            "purpose": "any maskable"
+        }
+    ],
+    "developer": {
+        "name": "Shariq Rafiq Anim",
+        "url": "https://github.com/shariq-rafiq-anim"
+    }
+}
